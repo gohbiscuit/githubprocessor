@@ -1,4 +1,4 @@
-## File Batch Processor
+## Git Hub Repository Processor
 
 This repository contains a simple file processing program built in Maven, compile in Java 21 with Junit 4 and
 Lombok plugins. It uses annotation to
