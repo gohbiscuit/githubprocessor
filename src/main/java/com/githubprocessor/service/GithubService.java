@@ -20,11 +20,15 @@ public class GithubService {
     private static final String GITHUB_API = "https://api.github.com/repos/";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Autowired
-    private GithubRepositoryDataRepository repository;
+    private final GithubRepositoryDataRepository repository;
+
+    private final GithubRepositoryMapper mapper;
 
     @Autowired
-    private GithubRepositoryMapper mapper;
+    public GithubService(GithubRepositoryMapper mapper, GithubRepositoryDataRepository repository) {
+        this.mapper = mapper;
+        this.repository = repository;
+    }
 
     public GithubRepositoryDto getRepositoryDetails(String owner, String repoName) throws GithubException {
         String id = owner + "/" + repoName;

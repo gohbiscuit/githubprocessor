@@ -19,8 +19,12 @@ import static com.githubprocessor.exception.GithubExceptionHandler.getErrorRespo
 @Slf4j
 public class GithubRepositoryController {
 
+    private final GithubService gitHubService;
+
     @Autowired
-    private GithubService gitHubService;
+    public GithubRepositoryController(GithubService gitHubService) {
+        this.gitHubService = gitHubService;
+    }
 
     @GetMapping("/{owner}/{repositoryName}")
     public ResponseEntity<?> getRepositoryDetails(@PathVariable String owner, @PathVariable String repositoryName) throws Exception {
