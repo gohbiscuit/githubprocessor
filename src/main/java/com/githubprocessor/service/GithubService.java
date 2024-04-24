@@ -51,7 +51,7 @@ public class GithubService {
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
                 GithubRepositoryData data = response.getBody();
                 data.setId(id);
-                log.info("GithubRepositoryData found:: " + data);
+                log.info("fetchAndCacheRepositoryDetails GithubRepositoryData found. Caching record: " + data);
                 repository.save(data);
                 return data;
             } else {
