@@ -25,7 +25,19 @@ and `Maven`.
 
 ### Features
 
-`Spring Batch Processing`
+A REST service which will return details of given Github repository and cache the response in h2 database.
+
+Sample endpoint `GET /repositories/{owner}/{repositoryname}` and gives the folowing data
+
+```
+{
+"fullName": "...",
+"description": "...",
+"cloneUrl": "...",
+"stars": 0,
+"createdAt": "..."
+}
+```
 
 `Error handling` Exceptions are thrown for invalid owner name and invalid repository details, if there are not fetched
 
@@ -54,12 +66,9 @@ The program can be built by running `mvn clean package`, which will also run the
 Navigate to target folder e.g. `githubprocessor/target` folder and run the following command:
 `java -jar githubprocessor-0.0.1-SNAPSHOT.jar`
 
-Download and install postman invoke `http://localhost:8080/repositories` endpoint.
+Download and install postman invoke `http://localhost:8080/repositories/{owner}/{repositoryname}` endpoint.
 
 ### Testing
 
 Runs the unit and integration tests under resources folder.
-Alternatively also visit `testing-evidences.excel` to view the testing process and results.
-
-
-
+Alternatively also visit `testing-evidences.excel` under root folder to view the testing process and results.
