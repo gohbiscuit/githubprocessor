@@ -20,11 +20,15 @@ public class GithubService {
     private static final String GITHUB_API = "https://api.github.com/repos/";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Autowired
-    private GithubRepositoryDataRepository repository;
+    private final GithubRepositoryDataRepository repository;
+
+    private final GithubRepositoryMapper mapper;
 
     @Autowired
-    private GithubRepositoryMapper mapper;
+    public GithubService(GithubRepositoryMapper mapper, GithubRepositoryDataRepository repository) {
+        this.mapper = mapper;
+        this.repository = repository;
+    }
 
     public GithubRepositoryDto getRepositoryDetails(String owner, String repoName) throws GithubException {
         String id = owner + "/" + repoName;
@@ -51,7 +55,7 @@ public class GithubService {
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
                 GithubRepositoryData data = response.getBody();
                 data.setId(id);
-                log.info("GithubRepositoryData found:: " + data);
+                log.info("fetchAndCacheRepositoryDetails GithubRepositoryData found. Caching record: " + data);
                 repository.save(data);
                 return data;
             } else {
